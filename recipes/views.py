@@ -12,5 +12,7 @@ def home(request: HttpRequest):
 
 def recipe(request: HttpRequest, id: int):
     return render(request, 'recipes/pages/recipe-view.html', context={
-        'recipe': make_recipe()
+        'recipe': make_recipe(),
+        'is_detail_page': True,
+        'id': id
     })
