@@ -12,32 +12,52 @@
 
 ## Instalação
 
-Crie o ambiente virtual com o python.
-
+Clone o repositório
 ```bash
-  python -m venv venv
+  git clone git@github.com:fandredev/django-recipes.git
 ```
 
-Ative o ambiente virtual.
+Crie o ambiente virtual com o python:
 
 ```bash
-  source bin/bash/activate
+ python -m venv venv
+```
+OU
+```bash
+ python3 -m venv venv
 ```
 
-Instale as dependencias usando pip
+Ative o ambiente virtual:
+
+```bash
+  source venv/bin/activate
+```
+
+Instale as dependencias usando pip:
 ```bash
   pip install -r requirements.txt
 ```
 
-Rode as migrations para o banco de dados
+Rode as migrations para o banco de dados:
 ```bash
   python manage.py migrate
 ```
     
- Run server
+ Rode o servidor de desenvolvimento
 ```bash
   python manage.py runserver
 ```
+
+ Abra o servidor de desenvolvimento
+```bash
+  Abra o navegador e coloque http://127.0.0.1:8000/ na url.
+```
+
+ Abra o Django Admin
+```bash
+  Abra o navegador e coloque http://127.0.0.1:8000/admin na url.
+```
+
 ## Stack utilizada
 
 **Front-end:** HTML, CSS (in Templates)
