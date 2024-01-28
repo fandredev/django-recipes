@@ -129,6 +129,10 @@ STATICFILES_DIRS = os.path.join(BASE_DIR, 'base_static'),
 # Juntar arquivos estáticos globais (se tiver) e de outros apps em um único diretório
 STATIC_ROOT = BASE_DIR / 'static'
 
+# Configuração de mídia e juntar arquivos de mídia de outros apps em um único diretório
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 

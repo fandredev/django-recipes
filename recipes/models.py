@@ -7,6 +7,9 @@ class Category(models.Model):
     """ Class Category for recipes """
     name = models.CharField(max_length=65)
 
+    def __str__(self):
+        return str(self.name)
+
 
 class Recipes(models.Model):
     """ Class Recipes """
@@ -29,3 +32,6 @@ class Recipes(models.Model):
 
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return str(self.title)
