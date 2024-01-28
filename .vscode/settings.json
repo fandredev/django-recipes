@@ -54,5 +54,5 @@
     "emmet.includeLanguages": {
       "django-html": "html" // batisteo.vscode-django
     },
-    "explorer.compactFolders": true,
+    "explorer.compactFolders": false,
   }
