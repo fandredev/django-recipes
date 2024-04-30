@@ -1,58 +1,62 @@
 {
-    "window.zoomLevel": 0,
-    "editor.fontSize": 16,
-    "python.languageServer": "Pylance", // ms-python.vscode-pylance
-    "python.testing.unittestEnabled": false, // ms-python.python
-    "python.testing.pytestEnabled": true,
-    "python.testing.pytestArgs": [], // -x to bail
-    "python.formatting.autopep8Args": [
-      "--indent-size=4"
-    ],
-    "flake8.args": [
-      "--max-line-length=150"
-    ],
-    "python.defaultInterpreterPath": "venv/bin/python",
-    "[python]": {
-      "editor.defaultFormatter": "ms-python.autopep8", // ms-python.python
-      "editor.tabSize": 4,
-      "editor.insertSpaces": true,
-      "editor.formatOnSave": true,
-      "editor.formatOnType": true,
-      "editor.codeActionsOnSave": {
-        "source.organizeImports": "explicit"
-      }
-    },
-    "[html]": {
-      "editor.formatOnSave": true,
-      "editor.defaultFormatter": "vscode.html-language-features",
-      "editor.quickSuggestions": {
-        "other": true,
-        "comments": true,
-        "strings": true
-      }
-    },
-    "[django-html]": {
-      "editor.formatOnSave": false,
-      "editor.defaultFormatter": "vscode.html-language-features",
-      "editor.quickSuggestions": {
-        "other": true,
-        "comments": true,
-        "strings": true
-      }
-    },
-    "files.associations": {
-      "*.js": "javascript",
-      "*.xml": "html",
-      "*.svg": "html",
-      "*.html": "html",
-      "django-html": "html", // batisteo.vscode-django
-      "**/*.html": "html",
-      "**/templates/**/*.html": "django-html",
-      "**/base_templates/**/*.html": "django-html",
-      "**/requirements{/**,*}.{txt,in}": "pip-requirements"
-    },
-    "emmet.includeLanguages": {
-      "django-html": "html" // batisteo.vscode-django
-    },
-    "explorer.compactFolders": false,
-  }
+  "python.analysis.typeCheckingMode": "basic"
+} // {
+//     "window.zoomLevel": 0,
+//     "editor.fontSize": 16,
+//     "python.languageServer": "Pylance", // ms-python.vscode-pylance
+//     "python.testing.unittestEnabled": false, // ms-python.python
+//     "python.testing.pytestEnabled": true,
+//     "python.testing.pytestArgs": [], // -x to bail
+//     "python.formatting.autopep8Args": [
+//       "--indent-size=4"
+//     ],
+//     "flake8.args": [
+//       "--max-line-length=150"
+//     ],
+//     "python.defaultInterpreterPath": "venv/bin/python",
+//     "[python]": {
+//       "editor.defaultFormatter": "ms-python.autopep8", // ms-python.python
+//       "editor.tabSize": 4,
+//       "editor.insertSpaces": true,
+//       "editor.formatOnSave": true,
+//       "editor.formatOnType": true,
+//       "editor.codeActionsOnSave": {
+//         "source.organizeImports": "explicit"
+//       }
+//     },
+//     "[html]": {
+//       "editor.formatOnSave": true,
+//       "editor.defaultFormatter": "vscode.html-language-features",
+//       "editor.quickSuggestions": {
+//         "other": true,
+//         "comments": true,
+//         "strings": true
+//       }
+//     },
+//     "[django-html]": {
+//       "editor.formatOnSave": false,
+//       "editor.defaultFormatter": "vscode.html-language-features",
+//       "editor.quickSuggestions": {
+//         "other": true,
+//         "comments": true,
+//         "strings": true
+//       }
+//     },
+//     "files.associations": {
+//       "*.js": "javascript",
+//       "*.xml": "html",
+//       "*.svg": "html",
+//       "*.html": "html",
+//       "django-html": "html", // batisteo.vscode-django
+//       "**/*.html": "html",
+//       "**/templates/**/*.html": "django-html",
+//       "**/base_templates/**/*.html": "django-html",
+//       "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+//     },
+//     "emmet.includeLanguages": {
+//       "django-html": "html" // batisteo.vscode-django
+//     },
+//     "explorer.compactFolders": false,
+//     "python.analysis.typeCheckingMode": "basic",
+//     "python.analysis.autoImportCompletions": true,
+//   }
