@@ -1,7 +1,7 @@
 asgiref==3.7.2
 astroid==3.0.2
 dill==0.3.8
-Django==5.0.1
+Django==5.0.3
 Faker==22.5.1
 isort==5.13.2
 mccabe==0.7.0
