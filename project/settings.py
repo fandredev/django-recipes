@@ -21,7 +21,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-ed83!79gwapx4k0*392$ey*l)3ca7cci5+pxsyt3ch-pu6r38f"
+SECRET_KEY = (
+    "django-insecure-ed83!79gwapx4k0*392$ey*l)3ca7cci5+pxsyt3ch-pu6r38f"  # noqa: E501
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,7 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Apps
-    "recipes",  # Isso aqui é o mesmo valor que o arquivo apps.py na propriedade name do aplicativo
+    "recipes",  # Isso aqui é o mesmo valor que o arquivo apps.py na propriedade name do aplicativo # noqa: E501
 ]
 
 MIDDLEWARE = [
@@ -89,16 +91,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa: E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",  # noqa: E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",  # noqa: E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",  # noqa: E501
     },
 ]
 
@@ -124,10 +126,10 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "base_static"),)
 
 
-# Juntar arquivos estáticos globais (se tiver) e de outros apps em um único diretório
+# Juntar arquivos estáticos globais (se tiver) e de outros apps em um único diretório # noqa: E501
 STATIC_ROOT = BASE_DIR / "static"
 
-# Configuração de mídia e juntar arquivos de mídia de outros apps em um único diretório
+# Configuração de mídia e juntar arquivos de mídia de outros apps em um único diretório # noqa: E501
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 

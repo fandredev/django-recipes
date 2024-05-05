@@ -50,12 +50,17 @@ Rode as migrations para o banco de dados:
 
  Abra o servidor de desenvolvimento
 ```bash
-  Abra o navegador e coloque http://127.0.0.1:8000/ na url.
+  Abra o navegador e coloque http://127.0.0.1:8000/ na url do seu navegador.
 ```
 
  Abra o Django Admin
 ```bash
-  Abra o navegador e coloque http://127.0.0.1:8000/admin na url.
+  Abra o navegador e coloque http://127.0.0.1:8000/admin na url do seu navegador.
+```
+
+ Run tests
+```bash
+  python manage.py test
 ```
 
 ## Stack utilizada
@@ -63,6 +68,8 @@ Rode as migrations para o banco de dados:
 **Front-end:** HTML, CSS (in Templates)
 
 **Back-end:** Django, Python
+
+**Tests:** Pytest, Unittest
 
 
 ## Feedback
