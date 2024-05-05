@@ -1,9 +1,4 @@
 
-## Referência
-
- - [Django documentation](https://docs.djangoproject.com/en/5.0/)
- - [Awesome README](https://github.com/matiassingers/awesome-readme)
-  - [Python](https://github.com/matiassingers/awesome-readme)
 
 ## Autores
 
@@ -76,3 +71,10 @@ Rode as migrations para o banco de dados:
 
 Se você tiver algum feedback, por favor nos deixe saber por meio de profissionalf.andre@gmail.com
 
+## Referência
+
+ - [Django documentation](https://docs.djangoproject.com/en/5.0/)
+ - [Python](https://www.python.org/)
+ - [Django course by Otávio Miranda](https://www.udemy.com/course/curso-de-django-web-framework-com-python-html-e-css/)
+ - [Pytest](https://docs.pytest.org/)
+ - [Unittest](https://docs.python.org/3/library/unittest.html)
