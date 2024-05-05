@@ -9,54 +9,65 @@
 
 Clone o repositório
 ```bash
-  git clone git@github.com:fandredev/django-recipes.git
+git clone git@github.com:fandredev/django-recipes.git
 ```
 
-Crie o ambiente virtual com o python:
+### Crie o ambiente virtual com o python:
 
 ```bash
- python -m venv venv
+python -m venv venv
 ```
-OU
+### OU
 ```bash
- python3 -m venv venv
-```
-
-Ative o ambiente virtual:
-
-```bash
-  source venv/bin/activate
+python3 -m venv venv
 ```
 
-Instale as dependencias usando pip:
+### Ative o ambiente virtual:
+
 ```bash
-  pip install -r requirements.txt
+source venv/bin/activate
 ```
 
-Rode as migrations para o banco de dados:
+### Instale as dependencias usando pip:
 ```bash
-  python manage.py migrate
+pip install -r requirements.txt
+```
+
+### Rode as migrations para o banco de dados:
+```bash
+python manage.py migrate
 ```
     
- Rode o servidor de desenvolvimento
+### Rode o servidor de desenvolvimento
 ```bash
-  python manage.py runserver
+python manage.py runserver
 ```
 
- Abra o servidor de desenvolvimento
+### Abra o servidor de desenvolvimento
 ```bash
-  Abra o navegador e coloque http://127.0.0.1:8000/ na url do seu navegador.
+Abra o browser e coloque http://127.0.0.1:8000/ na url do seu navegador.
 ```
 
- Abra o Django Admin
+### Abra o Django Admin
 ```bash
-  Abra o navegador e coloque http://127.0.0.1:8000/admin na url do seu navegador.
+Abra o browser e coloque http://127.0.0.1:8000/admin na URL do seu navegador.
 ```
-
- Run tests
+### Run tests
 ```bash
   python manage.py test
 ```
+
+### Run coverage with pytest
+```bash
+coverage run -m pytest
+```
+
+### Open coverage cover in HTML file
+```bash
+coverage html
+```
+  Depois disso, abra a pasta htmlcov e procure o arquivo index.html. 
+  Abra ele no seu navegador e lá estará a cobertura do projeto
 
 ## Stack utilizada
 
