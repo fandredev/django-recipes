@@ -18,7 +18,7 @@ class Recipe(models.Model):
 
     title = models.CharField(max_length=65)
     description = models.CharField(max_length=165)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     preparation_time = models.IntegerField()
     preparation_time_unit = models.CharField(max_length=65)
     servings = models.IntegerField()
@@ -31,9 +31,9 @@ class Recipe(models.Model):
     cover = models.ImageField(
         upload_to="recipes/covers/%Y/%m/%d/", blank=True, default=""
     )
-
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True, blank=True, default=None
+        Category, on_delete=models.SET_NULL, null=True, blank=True, 
+        default=None
     )
 
     author = models.ForeignKey(

@@ -14,7 +14,7 @@ class RecipeModelTest(RecipeTestBase):
             author=self.make_author(username="tate"),
             title="Test",
             description="Test",
-            slug="test",
+            slug="slug-for-test",
             preparation_time=10,
             preparation_time_unit="minutes",
             servings=2,
@@ -47,9 +47,6 @@ class RecipeModelTest(RecipeTestBase):
 
     def test_recipe_preparation_step_is_html_false_by_default(self):
         recipe = self.__make_recipe_no_defaults()
-
-        recipe.full_clean()
-        recipe.save()
 
         self.assertFalse(
             recipe.preparation_step_is_html,
