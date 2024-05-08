@@ -1,4 +1,4 @@
-name: Install dependencies and run tests
+name: Run tests and run coverage
 
 on:
   push:
@@ -8,7 +8,9 @@ on:
 
 jobs:
   build:
-
+    strategy:
+      matrix:
+        python-version: [3.6, 3.9]
     runs-on: ubuntu-latest
 
     steps:
@@ -24,3 +26,22 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
+
+  coverage:
+    strategy:
+      matrix:
+        python-version: [3.6, 3.9]
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Dependencies
+      run: |
+        pip install -r requirements.txt
+    - name: Run Code Coverage
+      run: |
+        coverage report
