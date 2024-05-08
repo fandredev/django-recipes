@@ -1,0 +1,11 @@
+{% if messages %}
+    <div class="main-content center container messages-container">
+        {% for message in messages %}
+            <div class="message message-{{message.tags}}">
+                <!-- Esse {{message.tags}} é a lista de tags que passei em MESSAGES_TAGS em settings.py -->
+                <!-- A classe message-{{message.tags}} está no nosso CSS global -->
+              {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
