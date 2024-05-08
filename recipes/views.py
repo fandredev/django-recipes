@@ -3,22 +3,21 @@ from django.shortcuts import render, get_list_or_404, get_object_or_404
 
 from .models import Recipe
 from django.db.models import Q
-from django.core.paginator import Paginator
 
 from utils.pagination import make_pagination
+
 
 def home(request: HttpRequest):
     recipes = Recipe.objects.filter(is_published=True).order_by("-id")
 
-    page_object, pagination_range = make_pagination(request, recipes, quantity_per_page=6, quantity_pages=4)
+    page_object, pagination_range = make_pagination(
+        request, recipes, quantity_per_page=6, quantity_pages=4
+    )
 
     return render(
         request,
         "recipes/pages/home.html",
-        context={
-            "recipes": page_object,
-            "pagination_range": pagination_range
-        },
+        context={"recipes": page_object, "pagination_range": pagination_range},
     )
 
 
@@ -29,7 +28,9 @@ def category(request: HttpRequest, category_id: int):
             is_published=True,
         ).order_by("-id")
     )
-    page_object, pagination_range = make_pagination(request, recipes, quantity_per_page=6, quantity_pages=4)
+    page_object, pagination_range = make_pagination(
+        request, recipes, quantity_per_page=6, quantity_pages=4
+    )
 
     return render(
         request,
@@ -53,13 +54,14 @@ def recipe(request: HttpRequest, id: str):
         },
     )
 
-def search(request: HttpRequest):
-   search_term = request.GET.get('q', '').strip()
 
-   if not search_term:
-       raise Http404()
-   
-   """
+def search(request: HttpRequest):
+    search_term = request.GET.get("q", "").strip()
+
+    if not search_term:
+        raise Http404()
+
+    """
         Isso é equivalente a:
         Buscar em Recipe, campos que tenham is_published = True e dentro dessa regra:
 
@@ -70,22 +72,25 @@ def search(request: HttpRequest):
         o Q é um objeto que permite a criação de queries complexas
    """
 
-   recipes = Recipe.objects.filter(
-       Q(
-        Q(title__icontains=search_term) | Q(description__icontains=search_term),  
-       ),
-       is_published=True
-   ).order_by('-id')
+    recipes = Recipe.objects.filter(
+        Q(
+            Q(title__icontains=search_term) | Q(description__icontains=search_term),
+        ),
+        is_published=True,
+    ).order_by("-id")
 
-   page_object, pagination_range = make_pagination(request, recipes, quantity_per_page=6, quantity_pages=4)
+    page_object, pagination_range = make_pagination(
+        request, recipes, quantity_per_page=6, quantity_pages=4
+    )
 
-
-
-
-   return render(request, "recipes/pages/search.html", {
-       'page_title': f'Search for "{search_term}"',
-       'search_term': search_term,
-       'recipes': page_object,
-       'pagination_range': pagination_range,
-       'additional_url_query': f'&q={search_term}'
-   })
+    return render(
+        request,
+        "recipes/pages/search.html",
+        {
+            "page_title": f'Search for "{search_term}"',
+            "search_term": search_term,
+            "recipes": page_object,
+            "pagination_range": pagination_range,
+            "additional_url_query": f"&q={search_term}",
+        },
+    )

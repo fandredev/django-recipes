@@ -18,8 +18,6 @@ class RecipeDetailViewTest(RecipeTestBase):
         view = resolve(reverse("recipes:recipe", kwargs={"id": 1}))
         self.assertIs(view.func, views.recipe)
 
-
     def test_recipe_detail_view_returns_404_if_no_recipe_found(self):
         response = self.client.get(reverse("recipes:recipe", kwargs={"id": 1000}))
         self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
-

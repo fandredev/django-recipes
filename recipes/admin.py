@@ -1,15 +1,14 @@
 from django.contrib import admin
 from .models import Category, Recipe
+
 # Register your models here.
 
 
-class CategoryAdmin(admin.ModelAdmin):
-    ...
+class CategoryAdmin(admin.ModelAdmin): ...
 
 
 admin.site.register(Category, CategoryAdmin)
 
 
 @admin.register(Recipe)
-class RecipesAdmin(admin.ModelAdmin):
-    ...
+class RecipesAdmin(admin.ModelAdmin): ...
