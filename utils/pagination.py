@@ -6,8 +6,9 @@ from django.core.paginator import Paginator
 
 # Generate SECRET_KEY VARIABLE (use this command in terminal inside environment and and i'm together)
 
-# python -c 
+# python -c
 # "import string as s;from random import SystemRandom as sr;print(''.join(sr().choices(s.ascii_letters + s.punctuation, k=64)))"
+
 
 def make_pagination_range(
     page_range: Sequence[int],

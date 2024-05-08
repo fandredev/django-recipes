@@ -50,11 +50,10 @@ class RecipeHomeViewTest(RecipeTestBase):
         self.assertIn("5 Porções", response_content)
         self.assertIn("5 Minutos", response_content)
 
-
     # @patch("recipes.views.PER_PAGE", new=3)
     def test_recipe_home_is_paginated(self):
         for i in range(8):
-            kwargs = {'slug': f'r{i}', 'author_data': {'username': f'u{i}'}}
+            kwargs = {"slug": f"r{i}", "author_data": {"username": f"u{i}"}}
 
             self.make_recipe(**kwargs)
 
