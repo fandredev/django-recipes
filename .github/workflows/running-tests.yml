@@ -44,4 +44,4 @@ jobs:
         pip install -r requirements.txt
     - name: Run Code Coverage
       run: |
-        coverage report
+        python manage.py test && coverage report
