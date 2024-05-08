@@ -23,6 +23,7 @@ from django.conf import settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("recipes.urls")),  # A string vazia é a raiz do site
+    path("authors/", include("authors.urls")),  
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
