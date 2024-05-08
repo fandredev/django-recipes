@@ -7,10 +7,10 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  test:
     strategy:
       matrix:
-        python-version: [3.10, 3.11, 3.12]
+        python-version: [3.11, 3.12]
     runs-on: ubuntu-latest
 
     steps:
@@ -30,7 +30,7 @@ jobs:
   coverage:
     strategy:
       matrix:
-        python-version: [3.10, 3.11, 3.12]
+        python-version: [3.11, 3.12]
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
