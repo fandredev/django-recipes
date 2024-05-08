@@ -314,7 +314,7 @@
     color: var(--color-white);
   }
   
-  .pagination .page-current {
+  .page-current {
     background: var(--color-primary-dark);
   }
   
