@@ -42,11 +42,29 @@ class RegisterForm(forms.ModelForm):
 
     # 2 FORMA PARA PERSONALIZAR O FORMULÁRIO:
 
+    first_name = forms.CharField(
+        error_messages={
+            "required": "Write your first name.",
+        },
+        label="First name",
+    )
+
+    last_name = forms.CharField(
+        error_messages={
+            "required": "Write your last name.",
+        }, label="Last name"
+    )
+
+    email = forms.EmailField(
+        error_messages={
+            "required": "E-mail is required.",
+        }, label="E-mail", help_text="The e-mail must be valid"
+    )
+
     password = forms.CharField(
         widget=forms.PasswordInput(),
         error_messages={
-            "required": "This field must not be empty.",
-            "max_length": "This field must have a maximum of 150 characters.",
+            "required": "Password must not be empty.",
         },
         help_text="Password must have at least one uppercase letter, one lowercase letter and one number. The length should be at least 8 characters.",
         validators=[strong_password],  # Validador customizado
@@ -54,7 +72,9 @@ class RegisterForm(forms.ModelForm):
     )
 
     password2 = forms.CharField(
-        widget=forms.PasswordInput(), required=True, label="Password2"
+        widget=forms.PasswordInput(), required=True, label="Password2", error_messages={
+            "required": "Please, confirm your password."
+            }
     )
 
     # 3 FORMA PARA PERSONALIZAR O FORMULÁRIO:
@@ -79,7 +99,7 @@ class RegisterForm(forms.ModelForm):
         }
 
         # Texto de ajuda abaixo do campo
-        help_texts = {"email": "The e-mail must be valid"}
+        # help_texts = {"email": "The e-mail must be valid"}
 
         # Personalizando as mensagens de erro
         error_messages = {
