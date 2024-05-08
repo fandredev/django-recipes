@@ -2,6 +2,8 @@ from django.test import TestCase
 from django.urls import reverse, resolve
 from recipes import views
 from http import HTTPStatus
+
+
 class RecipesURLsTest(TestCase):
 
     def test_recipe_home_url_is_correct(self):
@@ -24,10 +26,8 @@ class RecipesURLsTest(TestCase):
         url = reverse("recipes:search")
         resolved = resolve(url)
 
-        self.assertIs(resolved.func, views.search) 
+        self.assertIs(resolved.func, views.search)
 
     def test_recipe_search_loads_correct_template(self):
-     response = self.client.get(reverse("recipes:search") + '?q=teste') 
-     self.assertTemplateUsed(response, "recipes/pages/search.html")
-
-
+        response = self.client.get(reverse("recipes:search") + "?q=teste")
+        self.assertTemplateUsed(response, "recipes/pages/search.html")

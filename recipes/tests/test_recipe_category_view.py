@@ -8,7 +8,6 @@ class RecipeCategoryViewTest(RecipeTestBase):
         url = reverse("recipes:category", kwargs={"category_id": 110})
         self.assertEqual(url, "/recipes/category/110/")
 
-
     def test_category_template_loads_recipes(self):
         needed_title = "This is a category test"
         self.make_recipe(title=needed_title)

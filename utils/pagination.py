@@ -4,6 +4,7 @@ from typing import Sequence
 from django.http import HttpRequest
 from django.core.paginator import Paginator
 
+
 def make_pagination_range(
     page_range: Sequence[int],
     qty_pages: int,
@@ -22,22 +23,25 @@ def make_pagination_range(
 
     if stop_range > total_pages:
         start_range = start_range - abs(stop_range - total_pages)
-    
+
     pagination = page_range[start_range:stop_range]
 
     return {
-        'pagination': pagination,
-        'page_range': page_range,
-        'qty_pages': qty_pages,
-        'current_page': current_page,
-        'total_pages': total_pages,
-        'start_range': start_range,
-        'stop_range': stop_range,
-        'first_page_out_of_range': current_page > middle_range,
-        'last_page_out_of_range': stop_range < total_pages,
+        "pagination": pagination,
+        "page_range": page_range,
+        "qty_pages": qty_pages,
+        "current_page": current_page,
+        "total_pages": total_pages,
+        "start_range": start_range,
+        "stop_range": stop_range,
+        "first_page_out_of_range": current_page > middle_range,
+        "last_page_out_of_range": stop_range < total_pages,
     }
 
-def make_pagination(request: HttpRequest, queryset, quantity_per_page: int, quantity_pages: int = 4):
+
+def make_pagination(
+    request: HttpRequest, queryset, quantity_per_page: int, quantity_pages: int = 4
+):
     try:
         current_page = int(request.GET.get("page", 1))
     except ValueError:
@@ -45,12 +49,11 @@ def make_pagination(request: HttpRequest, queryset, quantity_per_page: int, quan
 
     paginator = Paginator(queryset, quantity_per_page)
     page_object = paginator.get_page(current_page)
-    
 
     pagination_range = make_pagination_range(
         page_range=paginator.page_range,
         qty_pages=quantity_pages,
-        current_page=current_page
+        current_page=current_page,
     )
 
     return page_object, pagination_range
