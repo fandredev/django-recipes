@@ -77,6 +77,8 @@ coverage html
 
 **Tests:** Pytest, Unittest
 
+**CI/CD:** GH Actions
+
 
 ## Feedback
 
