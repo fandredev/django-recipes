@@ -5,13 +5,16 @@ from .models import Recipe
 from django.db.models import Q
 
 from utils.pagination import make_pagination
+import os
+
+PER_PAGE = int(os.environ.get("PER_PAGE", 6))
 
 
 def home(request: HttpRequest):
     recipes = Recipe.objects.filter(is_published=True).order_by("-id")
 
     page_object, pagination_range = make_pagination(
-        request, recipes, quantity_per_page=6, quantity_pages=4
+        request, recipes, quantity_per_page=PER_PAGE, quantity_pages=4
     )
 
     return render(
@@ -29,7 +32,7 @@ def category(request: HttpRequest, category_id: int):
         ).order_by("-id")
     )
     page_object, pagination_range = make_pagination(
-        request, recipes, quantity_per_page=6, quantity_pages=4
+        request, recipes, quantity_per_page=PER_PAGE, quantity_pages=4
     )
 
     return render(
@@ -80,7 +83,7 @@ def search(request: HttpRequest):
     ).order_by("-id")
 
     page_object, pagination_range = make_pagination(
-        request, recipes, quantity_per_page=6, quantity_pages=4
+        request, recipes, quantity_per_page=PER_PAGE, quantity_pages=4
     )
 
     return render(
