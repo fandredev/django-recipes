@@ -34,7 +34,7 @@ class RecipeHomeViewTest(RecipeTestBase):
 
         # Check if one recipe exists
         self.assertIn(
-            "<h2>No recipes found here 🥲</h2>", response.content.decode("utf-8")
+            "<h1>No recipes found here 🥲</h1>", response.content.decode("utf-8")
         )
 
     def test_recipe_home_template_loads_recipes(self):
