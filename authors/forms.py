@@ -1,16 +1,17 @@
+import re
+
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-import re
 
 
-def add_attr(field, attr_name: str, attr_new_value: str):
-    existing_attr = field.widget.attrs.get(attr_name, "")
-    field.widget.attrs[attr_name] = f"{existing_attr} {attr_new_value}".strip()
+def add_attr(field, attr_name: str, attr_new_val: str):
+    existing = field.widget.attrs.get(attr_name, "")
+    field.widget.attrs[attr_name] = f"{existing} {attr_new_val}".strip()
 
 
-def add_placeholder(field, placeholder: str):
-    add_attr(field, "placeholder", placeholder)
+def add_placeholder(field, placeholder_val: str):
+    add_attr(field, "placeholder", placeholder_val)
 
 
 def strong_password(password: str):
@@ -28,130 +29,79 @@ def strong_password(password: str):
 
 
 class RegisterForm(forms.ModelForm):
-
-    # 1 FORMA PARA PERSONALIZAR O FORMULÁRIO:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        add_placeholder(self.fields["email"], "Your email")
         add_placeholder(self.fields["username"], "Your username")
+        add_placeholder(self.fields["email"], "Your e-mail")
         add_placeholder(self.fields["first_name"], "Ex.: John")
         add_placeholder(self.fields["last_name"], "Ex.: Doe")
         add_placeholder(self.fields["password"], "Type your password")
         add_placeholder(self.fields["password2"], "Repeat your password")
 
-    # 2 FORMA PARA PERSONALIZAR O FORMULÁRIO:
-
-    first_name = forms.CharField(
+    username = forms.CharField(
+        label="Username",
+        help_text=(
+            "Username must have letters, numbers or one of those @.+-_. "
+            "The length should be between 4 and 150 characters."
+        ),
         error_messages={
-            "required": "Write your first name.",
+            "required": "This field must not be empty",
+            "min_length": "Username must have at least 4 characters",
+            "max_length": "Username must have less than 150 characters",
         },
-        label="First name",
+        min_length=4,
+        max_length=150,
     )
-
+    first_name = forms.CharField(
+        error_messages={"required": "Write your first name"}, label="First name"
+    )
     last_name = forms.CharField(
-        error_messages={
-            "required": "Write your last name.",
-        }, label="Last name"
+        error_messages={"required": "Write your last name"}, label="Last name"
     )
-
     email = forms.EmailField(
-        error_messages={
-            "required": "E-mail is required.",
-        }, label="E-mail", help_text="The e-mail must be valid"
+        error_messages={"required": "E-mail is required"},
+        label="E-mail",
+        help_text="The e-mail must be valid.",
     )
-
     password = forms.CharField(
         widget=forms.PasswordInput(),
-        error_messages={
-            "required": "Password must not be empty.",
-        },
-        help_text="Password must have at least one uppercase letter, one lowercase letter and one number. The length should be at least 8 characters.",
-        validators=[strong_password],  # Validador customizado
+        error_messages={"required": "Password must not be empty"},
+        help_text=(
+            "Password must have at least one uppercase letter, "
+            "one lowercase letter and one number. The length should be "
+            "at least 8 characters."
+        ),
+        validators=[strong_password],
         label="Password",
     )
-
     password2 = forms.CharField(
-        widget=forms.PasswordInput(), required=True, label="Password2", error_messages={
-            "required": "Please, confirm your password."
-            }
+        widget=forms.PasswordInput(),
+        label="Password2",
+        error_messages={"required": "Please, repeat your password"},
     )
-
-    # 3 FORMA PARA PERSONALIZAR O FORMULÁRIO:
 
     class Meta:
         model = User
-        # exclude = ['password'] # Quais campos não aparecem no form
-
         fields = [
             "first_name",
-            "username",
             "last_name",
+            "username",
             "email",
             "password",
-        ]  # Quais campos aparecem no form
+        ]
 
-        labels = {  # Como ficará a label de cada campo
-            "first_name": "First name",
-            "last_name": "Last name",
-            "username": "User name",
-            "email": "E-mail",
-        }
+    # Validate if the email is already in use (Always use clean_YOUR_FIELD_NAME)
+    def clean_email(self):
+        email = self.cleaned_data.get("email", "")
+        exists = User.objects.filter(email=email).exists()
 
-        # Texto de ajuda abaixo do campo
-        # help_texts = {"email": "The e-mail must be valid"}
+        if exists:
+            raise ValidationError(
+                "User e-mail is already in use",
+                code="invalid",
+            )
 
-        # Personalizando as mensagens de erro
-        error_messages = {
-            "username": {
-                "unique": "This username is already in use. Please, choose another one.",
-                "required": "This field must not be empty.",
-                "max_length": "This field must have a maximum of 150 characters.",
-                "invalid": "Enter a valid username.",
-            }
-        }
-
-        # Personalizar os campos do formulário
-
-        # widgets = {
-        #     "first_name": forms.TextInput(
-        #         attrs={
-        #             "placeholder": "Type your password here",
-
-        #             "class": "form-control more-class-here"
-        #         }
-        #     ),
-        #     "password": forms.PasswordInput(
-        #         attrs={
-        #         }
-        #     ),
-        # }
-
-    # Validando o campo password do formulário (SEMPRE USAR O PREFIXO clean_+nome_do_campo)
-
-    # def clean_password(self):
-    #     data = self.cleaned_data.get("password")
-
-    #     if "atenção" in data:  # type: ignore
-    #         raise ValidationError(
-    #             "The password must not contain the word 'atenção'.", code="invalid"
-    #         )
-
-    #     return data
-
-    # Validando o campo first_name do formulário (SEMPRE USAR O PREFIXO clean_+nome_do_campo)
-
-    # def clean_first_name(self):
-    #     data = self.cleaned_data.get("first_name")
-
-    #     if "John Doe" in data:  # type: ignore
-    #         raise ValidationError(
-    #             "The first_name must not contain the word %(value)s.",
-    #             code="invalid",
-    #             params={"value": "'John Doe'"},
-    #         )
-
-    #     return data
+        return email
 
     def clean(self):
         cleaned_data = super().clean()
@@ -168,7 +118,6 @@ class RegisterForm(forms.ModelForm):
                     "password": password_confirmation_error,
                     "password2": [
                         password_confirmation_error,
-                        # more errors here if needed
                     ],
                 }
             )
