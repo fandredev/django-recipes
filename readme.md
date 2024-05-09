@@ -74,7 +74,7 @@ Open it in your browser and the project coverage will be there
 
 **Back-end:** Django, Python
 
-**Tests:** Pytest, Unittest
+**Tests:** Pytest, Unittest, Selenium
 
 **CI/CD:** GH Actions
 
