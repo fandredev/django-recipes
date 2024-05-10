@@ -36,6 +36,11 @@ pip install -r requirements.txt
 ```bash
 python manage.py migrate
 ```
+
+## Create a superuser
+```bash
+python manage.py createsuperuser
+```
     
 ## Run development server
 ```bash
@@ -43,18 +48,32 @@ python manage.py runserver
 ```
 
 ## Open development server
-```bash
-Abra o browser e coloque http://127.0.0.1:8000/ na url do seu navegador.
-```
+<h4>
+Open browser and put http://127.0.0.1:8000/ in URL browser.
+</h4>
+<br>
 
 ## Open Django Admin
-```bash
-Abra o browser e coloque http://127.0.0.1:8000/admin na URL do seu navegador.
-```
-## Run tests
+<h4>
+In another tab, open browser and put http://127.0.0.1:8000/admin in URL browser. Log in with your superuser</h4>
+<br>
+
+## Run tests with unittest
 ```bash
 python manage.py test
 ```
+
+## Run ALL tests with pytest
+
+``` 
+pytest
+``` 
+
+## Run tests functionals with Selenium
+
+```
+pytest -m 'functional'
+``` 
 
 ## Run coverage with pytest
 ```bash
@@ -65,8 +84,9 @@ coverage run -m pytest
 ```bash
 coverage html
 ```
-After that, open the htmlcov folder and look for the index.html file.
-Open it in your browser and the project coverage will be there
+<h4>After that, open the htmlcov folder and look for the index.html file.
+Open it in your browser and the project coverage will be there</h4>
+<br>
 
 ## Stack used
 
@@ -74,7 +94,7 @@ Open it in your browser and the project coverage will be there
 
 **Back-end:** Django, Python
 
-**Tests:** Pytest, Unittest
+**Tests:** Pytest, Unittest, Selenium
 
 **CI/CD:** GH Actions
 
@@ -83,7 +103,7 @@ Open it in your browser and the project coverage will be there
 
 ## Feedback
 
-Se você tiver algum feedback, por favor nos deixe saber por meio de profissionalf.andre@gmail.com
+If you have any feedback, please let us know via profissionalf.andre@gmail.com
 
 ## Referencies
 
@@ -93,3 +113,4 @@ Se você tiver algum feedback, por favor nos deixe saber por meio de profissiona
  - [Pytest](https://docs.pytest.org/)
  - [Unittest](https://docs.python.org/3/library/unittest.html)
  - [Black formatter](https://black.readthedocs.io/en/stable/the_black_code_style/index.html)
+ - [Selenium](https://selenium.dev/)

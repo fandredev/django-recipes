@@ -25,31 +25,31 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        python manage.py test
+        pytest -m 'not functional'
 
-  coverage:
-    strategy:
-      matrix:
-        python-version: [3.11, 3.12]
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Run tests with coverage
-      run: |
-        coverage run -m pytest
-        coverage xml
+  # coverage:
+  #   strategy:
+  #     matrix:
+  #       python-version: [3.11, 3.12]
+  #   runs-on: ubuntu-latest
+  #   continue-on-error: true
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #   - name: Set up Python ${{ matrix.python-version }}
+  #     uses: actions/setup-python@v3
+  #     with:
+  #       python-version: ${{ matrix.python-version }}
+  #   - name: Install Dependencies
+  #     run: |
+  #       python -m pip install --upgrade pip
+  #       pip install -r requirements.txt
+  #   - name: Run tests with coverage
+  #     run: |
+  #       coverage run -m pytest
+  #       coverage xml
 
-    - name: Upload coverage report
-      uses: actions/upload-artifact@v2
-      with:
-        name: coverage-report
-        path: coverage.xml
+  #   - name: Upload coverage report
+  #     uses: actions/upload-artifact@v2
+  #     with:
+  #       name: coverage-report
+  #       path: coverage.xml
