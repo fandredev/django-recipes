@@ -36,6 +36,11 @@ pip install -r requirements.txt
 ```bash
 python manage.py migrate
 ```
+
+## Create a superuser
+```bash
+python manage.py createsuperuser
+```
     
 ## Run development server
 ```bash
@@ -43,18 +48,32 @@ python manage.py runserver
 ```
 
 ## Open development server
-```bash
-Abra o browser e coloque http://127.0.0.1:8000/ na url do seu navegador.
-```
+<h4>
+Open browser and put http://127.0.0.1:8000/ in URL browser.
+</h4>
+<br>
 
 ## Open Django Admin
-```bash
-Abra o browser e coloque http://127.0.0.1:8000/admin na URL do seu navegador.
-```
-## Run tests
+<h4>
+In another tab, open browser and put http://127.0.0.1:8000/admin in URL browser. Log in with your superuser</h4>
+<br>
+
+## Run tests with unittest
 ```bash
 python manage.py test
 ```
+
+## Run ALL tests with pytest
+
+``` 
+pytest
+``` 
+
+## Run tests functionals with Selenium
+
+```
+pytest -m 'functional'
+``` 
 
 ## Run coverage with pytest
 ```bash
@@ -65,8 +84,9 @@ coverage run -m pytest
 ```bash
 coverage html
 ```
-After that, open the htmlcov folder and look for the index.html file.
-Open it in your browser and the project coverage will be there
+<h4>After that, open the htmlcov folder and look for the index.html file.
+Open it in your browser and the project coverage will be there</h4>
+<br>
 
 ## Stack used
 
