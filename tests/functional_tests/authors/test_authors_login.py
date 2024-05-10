@@ -38,3 +38,51 @@ class AuthorsLoginTest(AuthorsBaseTest):
         self.browser.get(self.live_server_url + reverse("authors:login_create"))
 
         self.assertIn("Not Found", self.browser.find_element(By.TAG_NAME, "body").text)
+
+    def test_form_login_is_invalid(self):
+        # Usuário abre a página de login
+        self.browser.get(self.live_server_url + reverse("authors:login"))
+
+        # Usuário vê o formulário de login
+        form = self.browser.find_element(By.CLASS_NAME, "main-form")
+
+        # Tenta enviar o formulário sem preencher os campos
+        username = self._get_by_placeholder(form, "Type your username")
+        password = self._get_by_placeholder(form, "Type your password")
+
+        username.send_keys(" ")
+        password.send_keys(" ")
+
+        # Usuário envia o formulário
+        form.submit()
+
+        # Usuário vê a mensagem de erro
+
+        self.assertIn(
+            "Invalid username or password",
+            self.browser.find_element(By.TAG_NAME, "body").text,
+        )
+
+    def test_form_login_invalid_credentials(self):
+        # Usuário abre a página de login
+        self.browser.get(self.live_server_url + reverse("authors:login"))
+
+        # Usuário vê o formulário de login
+        form = self.browser.find_element(By.CLASS_NAME, "main-form")
+
+        # Tenta enviar o formulário com dados que não correspondem a um usuário
+        username = self._get_by_placeholder(form, "Type your username")
+        password = self._get_by_placeholder(form, "Type your password")
+
+        username.send_keys("invalid_user")
+        password.send_keys("invalid_user")
+
+        # Usuário envia o formulário
+        form.submit()
+
+        # Usuário vê a mensagem de erro
+
+        self.assertIn(
+            "Invalid credentials",
+            self.browser.find_element(By.TAG_NAME, "body").text,
+        )

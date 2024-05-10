@@ -103,7 +103,7 @@ Open it in your browser and the project coverage will be there</h4>
 
 ## Feedback
 
-Se você tiver algum feedback, por favor nos deixe saber por meio de profissionalf.andre@gmail.com
+If you have any feedback, please let us know via profissionalf.andre@gmail.com
 
 ## Referencies
 
@@ -113,3 +113,4 @@ Se você tiver algum feedback, por favor nos deixe saber por meio de profissiona
  - [Pytest](https://docs.pytest.org/)
  - [Unittest](https://docs.python.org/3/library/unittest.html)
  - [Black formatter](https://black.readthedocs.io/en/stable/the_black_code_style/index.html)
+ - [Selenium](https://selenium.dev/)

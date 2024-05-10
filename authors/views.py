@@ -81,11 +81,13 @@ def login_create(request: HttpRequest):
 def logout_view(request: HttpRequest):
 
     if not request.POST:
+        messages.error(request, "Invalid logout request")
         return redirect(reverse("authors:login"))
 
     if request.POST.get("username") != request.user.username:  # type: ignore
-        messages.error(request, "Invalid username")
+        messages.error(request, "Invalid logout user")
         return redirect(reverse("authors:logout"))
 
+    messages.success(request, "Logged out successfully")
     logout(request)
     return redirect(reverse("authors:login"))
