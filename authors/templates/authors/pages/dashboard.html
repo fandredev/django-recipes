@@ -7,6 +7,26 @@
     <h2>Dashboard ({{ user }})</h2>
     {% include 'authors/partials/login_messages.html' %}
 
+    <div class="authors-dashboard-container">
+      <h3>Your recipes</h3>
+      <ul>
+        {% for recipe in recipes %}
+
+          <li>
+            <a href="#">{{ recipe.title }}</a>
+            {% comment %} <form class="inline-form" action="{% url 'authors:delete_recipe' recipe.id %}" method='POST'>
+              {% csrf_token %}
+              <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
+              <button class="plaintext-button" type="submit">delete</button>
+            </form> {% endcomment %}
+          </li>
+
+            {%empty%}
+            <li>You do not have recipes, please create one. </li>
+
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 
   {% include 'global/partials/messages.html' %}
