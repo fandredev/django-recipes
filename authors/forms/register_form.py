@@ -2,18 +2,30 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
-from utils.django_forms import add_placeholder, strong_password
+from utils.django_forms import (
+    add_placeholder,
+    strong_password,
+)
 
 
 class RegisterForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        add_placeholder(self.fields["username"], "Your username")
+        add_placeholder(
+            self.fields["username"],
+            "Your username",
+        )
         add_placeholder(self.fields["email"], "Your e-mail")
         add_placeholder(self.fields["first_name"], "Ex.: John")
         add_placeholder(self.fields["last_name"], "Ex.: Doe")
-        add_placeholder(self.fields["password"], "Type your password")
-        add_placeholder(self.fields["password2"], "Repeat your password")
+        add_placeholder(
+            self.fields["password"],
+            "Type your password",
+        )
+        add_placeholder(
+            self.fields["password2"],
+            "Repeat your password",
+        )
 
     username = forms.CharField(
         label="Username",
@@ -30,10 +42,12 @@ class RegisterForm(forms.ModelForm):
         max_length=150,
     )
     first_name = forms.CharField(
-        error_messages={"required": "Write your first name"}, label="First name"
+        error_messages={"required": "Write your first name"},
+        label="First name",
     )
     last_name = forms.CharField(
-        error_messages={"required": "Write your last name"}, label="Last name"
+        error_messages={"required": "Write your last name"},
+        label="Last name",
     )
     email = forms.EmailField(
         error_messages={"required": "E-mail is required"},
@@ -88,7 +102,8 @@ class RegisterForm(forms.ModelForm):
 
         if password != password2:
             password_confirmation_error = ValidationError(
-                "Password and password2 must be equal", code="invalid"
+                "Password and password2 must be equal",
+                code="invalid",
             )
             raise ValidationError(
                 {

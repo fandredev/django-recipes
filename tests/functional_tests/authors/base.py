@@ -1,7 +1,11 @@
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from django.contrib.staticfiles.testing import (
+    StaticLiveServerTestCase,
+)
 from utils.browser import make_chrome_browser
 from selenium.webdriver.common.by import By
-from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.remote.webelement import (
+    WebElement,
+)
 
 
 class AuthorsBaseTest(StaticLiveServerTestCase):
@@ -18,7 +22,12 @@ class AuthorsBaseTest(StaticLiveServerTestCase):
 
         time.sleep(seconds)
 
-    def _get_by_placeholder(self, web_element: WebElement, placeholder: str):
+    def _get_by_placeholder(
+        self,
+        web_element: WebElement,
+        placeholder: str,
+    ):
         return web_element.find_element(
-            By.XPATH, f'//input[@placeholder="{placeholder}"]'
+            By.XPATH,
+            f'//input[@placeholder="{placeholder}"]',
         )

@@ -14,7 +14,9 @@ class Migration(migrations.Migration):
             model_name="recipe",
             name="cover",
             field=models.ImageField(
-                blank=True, default="", upload_to="recipes/covers/%Y/%m/%d/"
+                blank=True,
+                default="",
+                upload_to="recipes/covers/%Y/%m/%d/",
             ),
         ),
     ]

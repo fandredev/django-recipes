@@ -45,7 +45,10 @@ def make_pagination_range(
 
 
 def make_pagination(
-    request: HttpRequest, queryset, quantity_per_page: int, quantity_pages: int = 4
+    request: HttpRequest,
+    queryset,
+    quantity_per_page: int,
+    quantity_pages: int = 4,
 ):
     try:
         current_page = int(request.GET.get("page", 1))

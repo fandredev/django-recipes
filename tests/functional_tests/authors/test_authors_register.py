@@ -2,7 +2,9 @@ from .base import AuthorsBaseTest
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.remote.webelement import (
+    WebElement,
+)
 from faker import Faker
 
 
@@ -22,7 +24,10 @@ class AuthorsRegisterTest(AuthorsBaseTest):
                 field.send_keys(" " * 20)
 
     def __get_form(self):
-        return self.browser.find_element(By.XPATH, "/html/body/main/div[2]/form")
+        return self.browser.find_element(
+            By.XPATH,
+            "/html/body/main/div[2]/form",
+        )
 
     def __form_field_test_with_callback(self, callback):
         self.browser.get(self.live_server_url + "/authors/register/")
@@ -68,7 +73,10 @@ class AuthorsRegisterTest(AuthorsBaseTest):
 
             form = self.__get_form()
 
-            self.assertIn("This field must not be empty", form.text)
+            self.assertIn(
+                "This field must not be empty",
+                form.text,
+            )
 
         self.__form_field_test_with_callback(callback)
 
@@ -80,7 +88,10 @@ class AuthorsRegisterTest(AuthorsBaseTest):
 
             form = self.__get_form()
 
-            self.assertIn("The e-mail must be valid", form.text)
+            self.assertIn(
+                "The e-mail must be valid",
+                form.text,
+            )
 
         self.__form_field_test_with_callback(callback)
 
@@ -92,11 +103,16 @@ class AuthorsRegisterTest(AuthorsBaseTest):
             password2.send_keys("P@ssw0rd_Different")
             password2.send_keys(Keys.ENTER)
             form = self.__get_form()
-            self.assertIn("Password and password2 must be equal", form.text)
+            self.assertIn(
+                "Password and password2 must be equal",
+                form.text,
+            )
 
         self.__form_field_test_with_callback(callback)
 
-    def test_user_valid_data_register_successfully(self):
+    def test_user_valid_data_register_successfully(
+        self,
+    ):
         self.browser.get(self.live_server_url + "/authors/register/")
 
         form = self.__get_form()
