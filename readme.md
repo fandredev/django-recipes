@@ -1,8 +1,14 @@
+## Stack used
+
+<img src="https://skillicons.dev/icons?i=html,css,javascript,python,django,githubactions,selenium&theme=dark" />
+
+**Tests:** Pytest, Unittest<br>
+**Lint:** Black
+
 
 
 ## Authors
-
-- [@fandredev](https://www.linkedin.com/in/devfandre/)
+[@fandredev](https://www.linkedin.com/in/devfandre/)
 
 
 ## Installation:
@@ -87,19 +93,6 @@ coverage html
 <h4>After that, open the htmlcov folder and look for the index.html file.
 Open it in your browser and the project coverage will be there</h4>
 <br>
-
-## Stack used
-
-**Front-end:** HTML, CSS (in Templates)
-
-**Back-end:** Django, Python
-
-**Tests:** Pytest, Unittest, Selenium
-
-**CI/CD:** GH Actions
-
-**Lint:** Black
-
 
 ## Feedback
 
