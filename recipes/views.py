@@ -1,8 +1,12 @@
 from django.http import Http404
+from django.http.response import HttpResponse as HttpResponse
 from .models import Recipe
 from django.db.models import Q
 
+from django.http import JsonResponse
+
 from utils.pagination import make_pagination
+from django.forms.models import model_to_dict
 import os
 from django.views.generic import (
     ListView,
@@ -43,6 +47,15 @@ class RecipeListViewBase(ListView):
 
 class RecipeListViewHome(RecipeListViewBase):
     template_name = "recipes/pages/home.html"
+
+
+class RecipeListViewHomeAPI(RecipeListViewBase):
+    template_name = "recipes/pages/home-api.html"
+
+    def render_to_response(self, context, **response_kwargs):
+        recipes_dict = self.get_context_data()["recipes"]
+        recipes_list = recipes_dict.object_list.values()
+        return JsonResponse(list(recipes_list), safe=False)
 
 
 class RecipeListViewCategory(RecipeListViewBase):
@@ -136,3 +149,20 @@ class RecipeDetail(DetailView):
         )
 
         return ctx
+
+
+class RecipeDetailAPI(RecipeDetail):
+    def render_to_response(self, context, **response_kwargs):
+        recipe = self.get_context_data()["recipe"]
+        recipe_dict = model_to_dict(recipe)
+
+        if recipe_dict.get("cover"):
+            recipe_dict["cover"] = (
+                self.request.build_absolute_uri() + recipe_dict["cover"].url
+            )
+
+        del recipe_dict[
+            "is_published"
+        ]  # Se eu não quiser que o campo is_published seja retornado
+
+        return JsonResponse(recipe_dict, safe=False)
