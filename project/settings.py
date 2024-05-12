@@ -42,10 +42,12 @@ INSTALLED_APPS = [
     # Apps
     "recipes",  # Isso aqui é o mesmo valor que o arquivo apps.py na propriedade name do aplicativo # noqa: E501
     "authors",
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -146,3 +148,8 @@ MESSAGES_TAGS = {
     constants.SUCCESS: "success",
     constants.WARNING: "warning",
 }
+
+# Config debug
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
