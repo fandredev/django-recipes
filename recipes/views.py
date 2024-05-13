@@ -1,19 +1,50 @@
 from django.http import Http404
 from django.http.response import HttpResponse as HttpResponse
 from .models import Recipe
-from django.db.models import Q
+from django.db.models import Q, F
 
 from django.http import JsonResponse
 
+from django.db.models.aggregates import Count
+
 from utils.pagination import make_pagination
 from django.forms.models import model_to_dict
+from django.shortcuts import render
 import os
 from django.views.generic import (
     ListView,
     DetailView,
 )
 
+from django.db.models import Q
+
 PER_PAGE = int(os.environ.get("PER_PAGE", 6))
+
+
+def theory(request, *args, **kwargs):
+    # Traga todos os objetos que tenham o título que contenha "bolo" e que tenham o id maior que 3 e que estejam publicados
+    # OU
+    # Traga todos os objetos que tenham o id maior que 1000
+
+    # recipes = Recipe.objects.filter(
+    #     Q(title__icontains="bolo", id__gt=3, is_published=True) | Q(id__gt=1000)
+    # )[:10]
+
+    # Referenciar outro campo de um objeto
+    # recipes = Recipe.objects.filter(id=F("author__id")).order_by("-id")[:10]
+
+    # Melhora a performance pois faz select em campos específicos e não usando o * que traz todos os campos
+    recipes = Recipe.objects.values("id", "title").filter(title__icontains="bolo")[:10]
+
+    number_of_recipes = recipes.aggregate(number=Count("id"))
+
+    # try:
+    #     recipes = Recipe.objects.get(pk=55551)
+    # except Recipe.DoesNotExist:
+    #     raise Http404()
+
+    context = {"recipes": recipes, "number_of_recipes": number_of_recipes["number"]}
+    return render(request, "recipes/pages/theory.html", context=context)
 
 
 class RecipeListViewBase(ListView):

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theory</title>
+</head>
+<body>
+    <h1>Theory</h1>
+    <p>Quantidade total de receitas: {{number_of_recipes}}</p>
+    {% for recipe in recipes %}
+        {% comment %} <li>{{recipe.id}} {{recipe.author__username}} {{recipe.title}}</li> {% endcomment %}
+        <li>{{recipe}}</li>
+        {%empty%}
+        <p>No recipes found.</p>
+    {% endfor %}
+</body>
+</html>
