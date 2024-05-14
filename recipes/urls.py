@@ -5,7 +5,7 @@ from . import views
 app_name = "recipes"
 
 urlpatterns = [
-    path("theory/", views.theory, name="theory"),
+    # path("theory/", views.theory, name="theory"),
     path(
         "",
         views.RecipeListViewHome.as_view(),

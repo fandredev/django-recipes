@@ -28,6 +28,7 @@ pylint==3.0.3
 PySocks==1.7.1
 pytest==8.2.0
 pytest-django==4.8.0
+pytest-dotenv==0.5.2
 python-dateutil==2.8.2
 python-dotenv==1.0.1
 selenium==4.20.0
