@@ -14,10 +14,15 @@ import os
 from pathlib import Path
 from django.contrib.messages import constants
 
+from utils.environment import get_env_variable, parse_comma_separate_str_to_list
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+if os.environ.get("DEBUG", None) is None:
+    from dotenv import load_dotenv
 
+    load_dotenv()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -27,7 +32,12 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "INSECURE")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if os.environ.get("DEBUG") == "1" else False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS: list[str] = parse_comma_separate_str_to_list(
+    get_env_variable("ALLOWED_HOSTS")
+)
+CSRF_TRUSTED_ORIGINS: list[str] = parse_comma_separate_str_to_list(
+    get_env_variable("CSRF_TRUSTED_ORIGINS")
+)
 
 
 # Application definition
