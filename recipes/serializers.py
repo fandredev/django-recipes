@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from authors.signals import User
 from recipes.models import Recipe
+from authors.validators import AuthorRecipeValidator
 
 # USANDO O SERIALIZER DE FORMA MANUAL
 
@@ -39,6 +40,13 @@ class RecipeSerializer(serializers.ModelSerializer):
             "public",
             "preparation",
             "author",
+            "preparation_time",
+            "preparation_time_unit",
+            "preparation_step",
+            "preparation_step_is_html",
+            "servings_unit",
+            "servings",
+            "cover",
         ]
 
     public = serializers.BooleanField(source="is_published", read_only=True)
@@ -49,3 +57,16 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     def get_preparation(self, recipe: Recipe):
         return f"{recipe.preparation_time} {recipe.preparation_time_unit}"
+
+    def validate(self, attrs):
+        super_validate = super().validate(attrs)
+        AuthorRecipeValidator(data=attrs, ErrorClass=serializers.ValidationError)
+
+        return super_validate
+
+    # # VALIDAÇÃO DE CAMPOS
+    # def validate_title(self, title: str):
+    #     if len(title) < 5:
+    #         raise serializers.ValidationError("O título deve ter mais de 5 caracteres")
+
+    #     return title
