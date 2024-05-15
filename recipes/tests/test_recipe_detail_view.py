@@ -1,6 +1,6 @@
 from django.urls import reverse, resolve
 from http import HTTPStatus
-from recipes import views
+from recipes.views import site
 from recipes.tests.test_recipe_base import (
     RecipeTestBase,
 )
@@ -22,7 +22,7 @@ class RecipeDetailViewTest(RecipeTestBase):
         view = resolve(reverse("recipes:recipe", kwargs={"pk": 1}))
         self.assertIs(
             view.func.view_class,
-            views.RecipeDetail,
+            site.RecipeDetail,
         )
 
     def test_recipe_detail_view_returns_404_if_no_recipe_found(

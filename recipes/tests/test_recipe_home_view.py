@@ -73,7 +73,7 @@ class RecipeHomeViewTest(RecipeTestBase):
     def test_recipe_home_is_paginated(self):
         self.make_recipe_batch(8)
 
-        with patch("recipes.views.PER_PAGE", new=3):
+        with patch("recipes.views.site.PER_PAGE", new=3):
             response = self.client.get(reverse("recipes:home"))
             recipes = response.context["recipes"]
 
@@ -89,7 +89,7 @@ class RecipeHomeViewTest(RecipeTestBase):
     ):
         self.make_recipe_batch(8)
 
-        with patch("recipes.views.PER_PAGE", new=3):
+        with patch("recipes.views.site.PER_PAGE", new=3):
             response = self.client.get(reverse("recipes:home") + "?page=invalid")
             self.assertEqual(
                 response.context["recipes"].number,

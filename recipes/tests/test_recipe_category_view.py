@@ -2,7 +2,7 @@ from django.urls import reverse, resolve
 from recipes.tests.test_recipe_base import (
     RecipeTestBase,
 )
-from recipes import views
+from recipes.views import site
 from http import HTTPStatus
 
 
@@ -19,7 +19,7 @@ class RecipeCategoryViewTest(RecipeTestBase):
         )
         self.assertIs(
             view.func.view_class,
-            views.RecipeListViewCategory,
+            site.RecipeListViewCategory,
         )
 
     def test_recipe_category_view_returns_404_if_no_recipes_found(

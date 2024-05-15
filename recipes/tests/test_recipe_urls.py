@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse, resolve
-from recipes import views
+from recipes.views import site
 from http import HTTPStatus
 
 
@@ -35,7 +35,7 @@ class RecipesURLsTest(TestCase):
 
         self.assertIs(
             resolved.func.view_class,
-            views.RecipeListViewSearch,
+            site.RecipeListViewSearch,
         )
 
     def test_recipe_search_loads_correct_template(
