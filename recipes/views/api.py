@@ -27,22 +27,30 @@ def recipe_api_list(request):
         )  # isso é bom para ver as validações
 
 
-@api_view(["GET"])
+@api_view(["GET", "PATCH", "DELETE"])
 def recipe_api_detail(request, pk: int):
-    recipes = get_object_or_404(Recipe, pk=pk, is_published=True)
+    recipe = get_object_or_404(Recipe, pk=pk, is_published=True)
 
-    serializer = RecipeSerializer(instance=recipes)
-    return Response(serializer.data)
-
-    # recipe = Recipe.objects.get_published().filter(pk=pk).first()  # type: ignore
-
-    # if recipe:
-    #     serializer = RecipeSerializer(instance=recipe)
-    #     return Response(serializer.data)
-    # else:
-    #     return Response(
-    #         {
-    #             "detail": "eita",
-    #         },
-    #         status=HTTPStatus.IM_A_TEAPOT,
-    #     )
+    if request.method == "GET":
+        serializer = RecipeSerializer(
+            instance=recipe,
+            many=False,
+            context={"request": request},
+        )
+        return Response(serializer.data)
+    elif request.method == "PATCH":
+        serializer = RecipeSerializer(
+            instance=recipe,
+            data=request.data,
+            many=False,
+            context={"request": request},
+            partial=True,
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(
+            serializer.data,
+        )
+    elif request.method == "DELETE":
+        recipe.delete()
+        return Response(status=HTTPStatus.NO_CONTENT)
