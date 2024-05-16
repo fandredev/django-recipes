@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "9666997d-d83a-4bde-88f7-d668b2589bd2",
+		"name": "DRF",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7059246",
+		"_collection_link": "https://bold-spaceship-399240.postman.co/workspace/My-Workspace~eda438f2-214b-4ecf-8d84-b02b922c88b1/collection/7059246-9666997d-d83a-4bde-88f7-d668b2589bd2?action=share&source=collection_link&creator=7059246"
+	},
+	"item": [
+		{
+			"name": "Recipe",
+			"item": [
+				{
+					"name": "Get all recipes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/recipes/api/v2/",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"recipes",
+								"api",
+								"v2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get especific recipe",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/recipes/api/v2/{{RECIPE_ID}}",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"recipes",
+								"api",
+								"v2",
+								"{{RECIPE_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Recipe",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Titulosssqq\",\n    \"description\":\"Desc\",\n    \"servings\": 1,\n    \"preparation_time\": 1,\n    \"preparation_time_unit\": \"Minutos\",\n    \"preparation_step\":\"bata tudo no liquidificador\",\n    \"servings_unit\": \"pessoas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/recipes/api/v2/",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"recipes",
+								"api",
+								"v2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Recipe",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Titulo Updated\",\n    \"servings\": 1,\n    \"preparation_time\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/recipes/api/v2/1015",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"recipes",
+								"api",
+								"v2",
+								"1015"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Recipe",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Titulo Updated\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/recipes/api/v2/1011",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"recipes",
+								"api",
+								"v2",
+								"1011"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

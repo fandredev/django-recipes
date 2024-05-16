@@ -1,6 +1,6 @@
 from django.http import Http404
 from django.http.response import HttpResponse as HttpResponse
-from .models import Recipe
+from ..models import Recipe
 from django.db.models import Q
 
 from django.http import JsonResponse
