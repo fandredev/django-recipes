@@ -23,6 +23,7 @@ class RecipeAPIV2ViewSet(ModelViewSet):
     permission_classes = [
         IsAuthenticatedOrReadOnly,
     ]
+    http_method_names = ["get", "post", "patch", "head", "delete"]
 
     def create(self, request: request.Request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
