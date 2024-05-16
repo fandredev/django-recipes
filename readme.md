@@ -94,6 +94,11 @@ coverage html
 Open it in your browser and the project coverage will be there</h4>
 <br>
 
+# Use collection
+<h4>Use DRF.postman_collection.json file to use Django Rest Framework routes</h4>
+<br>
+
+
 ## Feedback
 
 If you have any feedback, please let us know via profissionalf.andre@gmail.com
