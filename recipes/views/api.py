@@ -9,6 +9,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from django.shortcuts import get_object_or_404
+from rest_framework import status
 
 
 class RecipeAPIv2Pagination(PageNumberPagination):
@@ -22,6 +23,15 @@ class RecipeAPIV2ViewSet(ModelViewSet):
     permission_classes = [
         IsAuthenticatedOrReadOnly,
     ]
+
+    def create(self, request: request.Request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(author=request.user)
+        headers = self.get_success_headers(serializer.data)
+        return response.Response(
+            serializer.data, status=status.HTTP_201_CREATED, headers=headers
+        )
 
     def get_queryset(self):
         qs = super().get_queryset()
