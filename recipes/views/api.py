@@ -1,56 +1,70 @@
-from django.shortcuts import get_object_or_404
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from ..models import Recipe
-from http import HTTPStatus
 
 from ..serializers import RecipeSerializer
 
-
-@api_view(http_method_names=["GET", "POST"])
-def recipe_api_list(request):
-    if request.method == "GET":
-        recipes = Recipe.objects.get_published()[:10]  # type: ignore
-        # Sempre que for retornar mais de um objeto, é necessário passar o many=True
-        serializer = RecipeSerializer(instance=recipes, many=True)
-        return Response(serializer.data)
-    elif request.method == "POST":
-        data = request.data
-        serializer = RecipeSerializer(data=data)
-
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        # return Response(serializer.validated_data, status=HTTPStatus.CREATED) # isso é bom para ver as validações
-        return Response(
-            serializer.data, status=HTTPStatus.CREATED
-        )  # isso é bom para ver as validações
+from rest_framework.pagination import PageNumberPagination
+from rest_framework import request, response
+from rest_framework.viewsets import ModelViewSet
 
 
-@api_view(["GET", "PATCH", "DELETE"])
-def recipe_api_detail(request, pk: int):
-    recipe = get_object_or_404(Recipe, pk=pk, is_published=True)
+class RecipeAPIv2Pagination(PageNumberPagination):
+    page_size = 2
 
-    if request.method == "GET":
-        serializer = RecipeSerializer(
-            instance=recipe,
-            many=False,
-            context={"request": request},
-        )
-        return Response(serializer.data)
-    elif request.method == "PATCH":
+
+class RecipeAPIV2ViewSet(ModelViewSet):
+    queryset = Recipe.objects.get_published()  # type: ignore
+    serializer_class = RecipeSerializer
+    pagination_class = RecipeAPIv2Pagination
+
+    def partial_update(self, request: request.Request, *args, **kwargs):
+        pk = kwargs.get("pk")
+        recipe = self.get_queryset().filter(pk=pk).first()
         serializer = RecipeSerializer(
             instance=recipe,
             data=request.data,
-            many=False,
-            context={"request": request},
             partial=True,
+            context={"request": request},
         )
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(
-            serializer.data,
-        )
-    elif request.method == "DELETE":
-        recipe.delete()
-        return Response(status=HTTPStatus.NO_CONTENT)
+        return response.Response(serializer.data)
+
+
+# class RecipeAPIv2ListCreate(ListCreateAPIView):
+#     queryset = Recipe.objects.get_published()  # type: ignore
+#     serializer_class = RecipeSerializer
+#     pagination_class = RecipeAPIv2Pagination
+
+# def get(self, request: Request):
+#     recipes = Recipe.objects.get_published()[:10]  # type: ignore
+#     # Sempre que for retornar mais de um objeto, é necessário passar o many=True
+#     serializer = RecipeSerializer(instance=recipes, many=True)
+#     return Response(serializer.data)
+
+# def post(self, request):
+#     data = request.data
+#     serializer = RecipeSerializer(data=data)
+
+#     serializer.is_valid(raise_exception=True)
+#     serializer.save()
+
+#     # return Response(serializer.validated_data, status=HTTPStatus.CREATED) # isso é bom para ver as validações
+#     return Response(serializer.data, status=HTTPStatus.CREATED)
+
+
+# class RecipeAPIv2DetailUpdateDelete(RetrieveUpdateDestroyAPIView):
+#     queryset = Recipe.objects.get_published()  # type: ignore
+#     serializer_class = RecipeSerializer
+#     pagination_class = RecipeAPIv2Pagination
+
+# def get(self, request: Request, pk: int):
+#     recipe = get_object_or_404(Recipe, pk=pk, is_published=True)
+#     serializer = RecipeSerializer(instance=recipe, many=False)
+#     return Response(serializer.data)
+
+# Caso eu queira sobrescrever o método update
+
+# def delete(self, request: Request, pk: int):
+#     recipe = get_object_or_404(Recipe, pk=pk, is_published=True)
+#     recipe.delete()
+#     return Response(status=HTTPStatus.NO_CONTENT)

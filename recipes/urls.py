@@ -30,8 +30,25 @@ urlpatterns = [
         views.RecipeDetailAPI.as_view(),
         name="recipes_detail_api_v1",
     ),
-    path("recipes/api/v2/", views.recipe_api_list, name="recipe_api_v2_list"),
     path(
-        "recipes/api/v2/<int:pk>", views.recipe_api_detail, name="recipe_api_v2_detail"
+        "recipes/api/v2/",
+        views.RecipeAPIV2ViewSet.as_view(
+            {
+                "get": "list",
+                "post": "create",
+            }
+        ),
+        name="recipe_api_v2_list",
+    ),
+    path(
+        "recipes/api/v2/<int:pk>",
+        views.RecipeAPIV2ViewSet.as_view(
+            {
+                "get": "retrieve",
+                "patch": "partial_update",
+                "delete": "destroy",
+            }
+        ),
+        name="recipe_api_v2_detail",
     ),
 ]
