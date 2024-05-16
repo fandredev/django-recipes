@@ -96,6 +96,9 @@ Open it in your browser and the project coverage will be there</h4>
 
 ## Use collection
 <h4>Use DRF.postman_collection.json file to use Django Rest Framework routes</h4>
+
+![image](https://github.com/fandredev/django-recipes/assets/49297012/53ff7ffb-8810-4e39-8316-980c7a342a0d)
+
 <br>
 
 
