@@ -16,6 +16,17 @@ class RecipeAPIV2ViewSet(ModelViewSet):
     serializer_class = RecipeSerializer
     pagination_class = RecipeAPIv2Pagination
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        print("Paramêtros", self.kwargs)
+
+        category_id = self.request.query_params.get("category_id", "")  # type: ignore
+
+        if category_id != "" and category_id.isnumeric():
+            qs = qs.filter(category_id=category_id)
+
+        return qs
+
     def partial_update(self, request: request.Request, *args, **kwargs):
         pk = kwargs.get("pk")
         recipe = self.get_queryset().filter(pk=pk).first()
