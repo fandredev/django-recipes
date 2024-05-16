@@ -25,7 +25,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        pytest -m 'not functional'
+        pytest -m 'not functional' --cov=recipes .
     - name: Run Coverage
       uses: codecov/codecov-action@v4.0.1
       with:
