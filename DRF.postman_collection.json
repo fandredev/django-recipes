@@ -8,15 +8,22 @@
 	},
 	"item": [
 		{
-			"name": "Recipe",
+			"name": "Recipes",
 			"item": [
 				{
-					"name": "Get all recipes",
+					"name": "Get all recipes by Category ID",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
 						"url": {
-							"raw": "{{API_URL}}/recipes/api/v2/",
+							"raw": "{{API_URL}}/recipes/api/v2/?page=1&category_id=2",
 							"host": [
 								"{{API_URL}}"
 							],
@@ -25,6 +32,48 @@
 								"api",
 								"v2",
 								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "category_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all recipes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/recipes/api/v2/?page=3",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"recipes",
+								"api",
+								"v2",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "3"
+								}
 							]
 						}
 					},
@@ -53,11 +102,21 @@
 				{
 					"name": "Create Recipe",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\":\"Titulosssqq\",\n    \"description\":\"Desc\",\n    \"servings\": 1,\n    \"preparation_time\": 1,\n    \"preparation_time_unit\": \"Minutos\",\n    \"preparation_step\":\"bata tudo no liquidificador\",\n    \"servings_unit\": \"pessoas\"\n}",
+							"raw": "{\n    \"title\":\"Criado pelo adm\",\n    \"description\":\"Desc\",\n    \"servings\": 1,\n    \"preparation_time\": 1,\n    \"preparation_time_unit\": \"Minutos\",\n    \"preparation_step\":\"bata tudo no liquidificador\",\n    \"servings_unit\": \"pessoas\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -80,21 +139,68 @@
 					"response": []
 				},
 				{
-					"name": "Update Recipe",
+					"name": "Create Recipe with Multipart/Formdata",
 					"request": {
-						"method": "PATCH",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"title\":\"Titulo Updated\",\n    \"servings\": 1,\n    \"preparation_time\": 10\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cover",
+									"type": "file",
+									"src": "/home/felipe/Pictures/Screenshots/Screenshot from 2024-05-16 20-16-38.png"
+								},
+								{
+									"key": "title",
+									"value": "This is the title Others",
+									"description": "Never create equals title.",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is the description",
+									"type": "text"
+								},
+								{
+									"key": "preparation_time",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "preparation_time_unit",
+									"value": "pessoas",
+									"type": "text"
+								},
+								{
+									"key": "preparation_step",
+									"value": "Bata tudo no liquidificador e depois...",
+									"type": "text"
+								},
+								{
+									"key": "servings_unit",
+									"value": "pessoas",
+									"type": "text"
+								},
+								{
+									"key": "servings",
+									"value": "10",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "{{API_URL}}/recipes/api/v2/1015",
+							"raw": "{{API_URL}}/recipes/api/v2/",
 							"host": [
 								"{{API_URL}}"
 							],
@@ -102,7 +208,47 @@
 								"recipes",
 								"api",
 								"v2",
-								"1015"
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Recipe",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Updated\",\n    \"servings\": 1,\n    \"preparation_time\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/recipes/api/v2/1022/",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"recipes",
+								"api",
+								"v2",
+								"1022",
+								""
 							]
 						}
 					},
@@ -111,6 +257,16 @@
 				{
 					"name": "Delete Recipe",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"body": {
@@ -123,7 +279,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_URL}}/recipes/api/v2/1011",
+							"raw": "{{API_URL}}/recipes/api/v2/1023/",
 							"host": [
 								"{{API_URL}}"
 							],
@@ -131,7 +287,165 @@
 								"recipes",
 								"api",
 								"v2",
-								"1011"
+								"1023",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "JWT",
+			"item": [
+				{
+					"name": "Create Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"admin\",\n    \"password\":\"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/recipes/api/token/",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"recipes",
+								"api",
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refresh\": \"{{REFRESH_TOKEN}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/recipes/api/token/refresh/",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"recipes",
+								"api",
+								"token",
+								"refresh",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"{{ACCESS_TOKEN}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/recipes/api/token/verify/",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"recipes",
+								"api",
+								"token",
+								"verify",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authors",
+			"item": [
+				{
+					"name": "Get Me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/authors/api/me",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"authors",
+								"api",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Especific Author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/authors/api/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"authors",
+								"api",
+								"1"
 							]
 						}
 					},
