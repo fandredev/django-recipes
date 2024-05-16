@@ -12,4 +12,5 @@ INSTALLED_APPS = [
     "recipes",  # Isso aqui é o mesmo valor que o arquivo apps.py na propriedade name do aplicativo # noqa: E501
     "authors",
     "debug_toolbar",
+    "rest_framework_simplejwt",
 ]
