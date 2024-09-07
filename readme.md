@@ -19,17 +19,17 @@ git clone git@github.com:fandredev/django-recipes.git
 
 ## Create virtual environment with Python
 
-```bash
+```python
 python -m venv venv
 ```
 ## OR
-```bash
+```python
 python3 -m venv venv
 ```
 
 ## Activate the virtual environment
 
-```bash
+```python
 source venv/bin/activate
 ```
 
@@ -39,17 +39,22 @@ pip install -r requirements.txt
 ```
 
 ## Run migrations to database
-```bash
+```python
 python manage.py migrate
 ```
 
 ## Create a superuser
-```bash
+```python
 python manage.py createsuperuser
 ```
     
-## Run development server
+## Clone the .env.example to .env before run server
 ```bash
+cp .env.example .env
+```
+
+## Run development server
+```python
 python manage.py runserver
 ```
 
@@ -65,19 +70,19 @@ In another tab, open browser and put http://127.0.0.1:8000/admin in URL browser.
 <br>
 
 ## Run tests with unittest
-```bash
+```python
 python manage.py test
 ```
 
 ## Run ALL tests with pytest
 
-``` 
+```python
 pytest
 ``` 
 
 ## Run tests functionals with Selenium
 
-```
+```python
 pytest -m 'functional'
 ``` 
 
