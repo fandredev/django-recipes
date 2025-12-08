@@ -46,5 +46,5 @@ tomlkit==0.12.3
 trio==0.25.0
 trio-websocket==0.11.1
 typing_extensions==4.9.0
-urllib3==2.5.0
+urllib3==2.6.0
 wsproto==1.2.0
