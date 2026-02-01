@@ -1,5 +1,7 @@
-from django.urls import reverse
 from http import HTTPStatus
+
+from django.urls import reverse
+
 from recipes.tests.test_recipe_base import (
     RecipeTestBase,
 )
@@ -18,6 +20,10 @@ class RecipeSearchViewTest(RecipeTestBase):
                 "recipes:recipe",
                 kwargs={"pk": recipe.pk},
             )
+        )
+        self.assertEqual(
+            response.status_code,
+            HTTPStatus.NOT_FOUND,
         )
 
     def test_recipe_search_raises_for_404_if_no_search_term(

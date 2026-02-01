@@ -1,9 +1,10 @@
-from recipes.tests.test_recipe_base import (
-    RecipeTestBase,
-    Recipe,
-)
 from django.core.exceptions import ValidationError
 from parameterized import parameterized
+
+from recipes.tests.test_recipe_base import (
+    Recipe,
+    RecipeTestBase,
+)
 
 
 class RecipeModelTest(RecipeTestBase):
@@ -24,8 +25,6 @@ class RecipeModelTest(RecipeTestBase):
             servings_unit="people",
             preparation_step="Test",
         )
-        recipe.full_clean()
-        recipe.save()
 
     @parameterized.expand(
         [

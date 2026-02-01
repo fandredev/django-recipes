@@ -1,13 +1,14 @@
-from django.urls import reverse, resolve
+from http import HTTPStatus
+
+from django.urls import resolve, reverse
+
 from recipes.tests.test_recipe_base import (
     RecipeTestBase,
 )
 from recipes.views import site
-from http import HTTPStatus
 
 
 class RecipeCategoryViewTest(RecipeTestBase):
-
     def test_recipe_category_view_function_is_correct(
         self,
     ):
@@ -49,7 +50,7 @@ class RecipeCategoryViewTest(RecipeTestBase):
     def test_recipe_category_template_dont_load_recipes_not_published(
         self,
     ):
-        recipe = self.make_recipe(is_published=False)
+        self.make_recipe(is_published=False)
 
         response = self.client.get(reverse("recipes:recipe", kwargs={"pk": 1}))
 
