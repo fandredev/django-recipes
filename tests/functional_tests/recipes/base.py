@@ -1,10 +1,14 @@
 from django.contrib.staticfiles.testing import (
     StaticLiveServerTestCase,
 )
-from utils.browser import make_chrome_browser
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
 from recipes.tests.test_recipe_base import (
     RecipeMixin,
 )
+from utils.browser import make_chrome_browser
 
 
 class RecipeBaseFunctionalTest(StaticLiveServerTestCase, RecipeMixin):
@@ -15,3 +19,16 @@ class RecipeBaseFunctionalTest(StaticLiveServerTestCase, RecipeMixin):
     def tearDown(self) -> None:
         self.browser.quit()
         return super().tearDown()
+
+    def sleep(self, seconds: int = 5):
+        import time
+
+        time.sleep(seconds)
+
+    def wait_for(self, condition, timeout=10):
+        return WebDriverWait(self.browser, timeout).until(condition)
+
+    def wait_for_text_in_body(self, text, timeout=10):
+        return self.wait_for(
+            EC.text_to_be_present_in_element((By.TAG_NAME, "body"), text), timeout
+        )

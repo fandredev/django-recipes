@@ -1,22 +1,21 @@
-from .base import AuthorsBaseTest
 import pytest
+from faker import Faker
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import (
     WebElement,
 )
-from faker import Faker
+
+from .base import AuthorsBaseTest
 
 
 @pytest.mark.functional
 class AuthorsRegisterTest(AuthorsBaseTest):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.faker = Faker()
 
     def __fill_form_dummy_data(self, form: WebElement):
-
         fields = form.find_elements(By.TAG_NAME, "input")
 
         for field in fields:
@@ -47,9 +46,7 @@ class AuthorsRegisterTest(AuthorsBaseTest):
             first_name_field.send_keys(" ")
             first_name_field.send_keys(Keys.ENTER)
 
-            form = self.__get_form()
-
-            self.assertIn("Write your first name", form.text)
+            self.wait_for_text_in_body("Write your first name")
 
         self.__form_field_test_with_callback(callback)
 
@@ -59,9 +56,7 @@ class AuthorsRegisterTest(AuthorsBaseTest):
             last_name_field.send_keys(" ")
             last_name_field.send_keys(Keys.ENTER)
 
-            form = self.__get_form()
-
-            self.assertIn("Write your last name", form.text)
+            self.wait_for_text_in_body("Write your last name")
 
         self.__form_field_test_with_callback(callback)
 
@@ -71,12 +66,7 @@ class AuthorsRegisterTest(AuthorsBaseTest):
             last_name_field.send_keys(" ")
             last_name_field.send_keys(Keys.ENTER)
 
-            form = self.__get_form()
-
-            self.assertIn(
-                "This field must not be empty",
-                form.text,
-            )
+            self.wait_for_text_in_body("This field must not be empty")
 
         self.__form_field_test_with_callback(callback)
 
@@ -86,12 +76,7 @@ class AuthorsRegisterTest(AuthorsBaseTest):
             email_field.send_keys(" ")
             email_field.send_keys(Keys.ENTER)
 
-            form = self.__get_form()
-
-            self.assertIn(
-                "The e-mail must be valid",
-                form.text,
-            )
+            self.wait_for_text_in_body("The e-mail must be valid")
 
         self.__form_field_test_with_callback(callback)
 
@@ -102,11 +87,7 @@ class AuthorsRegisterTest(AuthorsBaseTest):
             password1.send_keys("P@ssw0rd")
             password2.send_keys("P@ssw0rd_Different")
             password2.send_keys(Keys.ENTER)
-            form = self.__get_form()
-            self.assertIn(
-                "Password and password2 must be equal",
-                form.text,
-            )
+            self.wait_for_text_in_body("Password and password2 must be equal")
 
         self.__form_field_test_with_callback(callback)
 
@@ -128,7 +109,4 @@ class AuthorsRegisterTest(AuthorsBaseTest):
 
         form.submit()
 
-        self.assertIn(
-            "User registered successfully",
-            self.browser.find_element(By.TAG_NAME, "body").text,
-        )
+        self.wait_for_text_in_body("User registered successfully")
