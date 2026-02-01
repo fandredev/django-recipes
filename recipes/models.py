@@ -1,11 +1,12 @@
 from collections import defaultdict
-from django.db import models
+
 from django.contrib.auth.models import User
+from django.db import models
+from django.db.models import F, Value
+from django.db.models.functions import Concat
 from django.forms import ValidationError
 from django.urls import reverse
 from django.utils.text import slugify
-from django.db.models import F, Value
-from django.db.models.functions import Concat
 
 
 class Category(models.Model):

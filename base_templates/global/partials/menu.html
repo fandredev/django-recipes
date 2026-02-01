@@ -2,17 +2,17 @@
     <i class="fas fa-bars"></i>
     <span class="hidden-text">Show menu</span>
   </button>
-  
+
   <div class="menu-container menu-hidden">
     <button class="button-close-menu button-close-menu-visible">
       <i class="fas fa-times-circle"></i>
       <span class="hidden-text">Close menu</span>
     </button>
-  
+
     <div class="menu-content">
       <nav class="menu-nav">
         <a href="{% url 'recipes:home' %}">Home</a>
-  
+
         {% if user.is_authenticated %}
           <a href="{% url 'authors:dashboard_recipe_new' %}">New recipe</a>
           <a href="{% url 'authors:dashboard' %}">Dashboard</a>

@@ -1,8 +1,7 @@
 from rest_framework import serializers
 
-from authors.signals import User
-from recipes.models import Recipe
 from authors.validators import AuthorRecipeValidator
+from recipes.models import Recipe
 
 # USANDO O SERIALIZER DE FORMA MANUAL
 

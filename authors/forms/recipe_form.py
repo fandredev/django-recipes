@@ -1,9 +1,11 @@
+from collections import defaultdict
+
 from django import forms
+from django.core.exceptions import ValidationError
+
+from authors.validators import AuthorRecipeValidator
 from recipes.models import Recipe
 from utils.django_forms import add_attr
-from collections import defaultdict
-from django.core.exceptions import ValidationError
-from authors.validators import AuthorRecipeValidator
 
 
 class AuthorRecipeForm(forms.ModelForm):

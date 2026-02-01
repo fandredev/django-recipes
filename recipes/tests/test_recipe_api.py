@@ -1,10 +1,12 @@
-from rest_framework import test
-from recipes.tests.test_recipe_base import RecipeMixin
-from django.urls import reverse
 from http import HTTPStatus
-from unittest.mock import patch
-from faker import Faker
 from unittest import skip
+from unittest.mock import patch
+
+from django.urls import reverse
+from faker import Faker
+from rest_framework import test
+
+from recipes.tests.test_recipe_base import RecipeMixin
 
 
 class RecipeAPIV2Utils(test.APITestCase, RecipeMixin):
@@ -45,7 +47,6 @@ class RecipeAPIV2Utils(test.APITestCase, RecipeMixin):
 
 
 class RecipeAPIV2Test(RecipeAPIV2Utils):
-
     def test_recipe_api_list_returns_status_code_200(self):
         response = self._get_recipe_api_list()
 

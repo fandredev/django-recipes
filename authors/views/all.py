@@ -1,9 +1,4 @@
-from django.http import HttpRequest
-from django.shortcuts import redirect, render
-from django.http import Http404
-from authors.forms import RegisterForm, LoginForm
 from django.contrib import messages
-from django.urls import reverse
 from django.contrib.auth import (
     authenticate,
     login,
@@ -12,6 +7,11 @@ from django.contrib.auth import (
 from django.contrib.auth.decorators import (
     login_required,
 )
+from django.http import Http404, HttpRequest
+from django.shortcuts import redirect, render
+from django.urls import reverse
+
+from authors.forms import LoginForm, RegisterForm
 from recipes.models import Recipe
 
 
@@ -99,7 +99,6 @@ def login_create(request: HttpRequest):
     redirect_field_name="next",
 )
 def logout_view(request: HttpRequest):
-
     if not request.POST:
         messages.error(request, "Invalid logout request")
         return redirect(reverse("authors:login"))

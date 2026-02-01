@@ -1,5 +1,6 @@
 from django.test import TestCase
-from recipes.models import Recipe, Category, User
+
+from recipes.models import Category, Recipe, User
 
 
 class RecipeMixin:

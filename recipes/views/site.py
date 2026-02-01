@@ -1,17 +1,17 @@
-from django.http import Http404
-from django.http.response import HttpResponse as HttpResponse
-from ..models import Recipe
-from django.db.models import Q
+import os
 
-from django.http import JsonResponse
+from django.db.models import Q
+from django.forms.models import model_to_dict
+from django.http import Http404, JsonResponse
+from django.http.response import HttpResponse as HttpResponse
+from django.views.generic import (
+    DetailView,
+    ListView,
+)
 
 from utils.pagination import make_pagination
-from django.forms.models import model_to_dict
-import os
-from django.views.generic import (
-    ListView,
-    DetailView,
-)
+
+from ..models import Recipe
 
 PER_PAGE = int(os.environ.get("PER_PAGE", 6))
 
@@ -68,7 +68,7 @@ class RecipeListViewCategory(RecipeListViewBase):
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)
 
-        ctx.update({"title": f'{ctx.get("recipes")[0].category.name} - Category | '})  # type: ignore
+        ctx.update({"title": f"{ctx.get('recipes')[0].category.name} - Category | "})  # type: ignore
 
         return ctx
 
@@ -96,8 +96,8 @@ class RecipeListViewSearch(RecipeListViewBase):
         Isso é equivalente a:
         Buscar em Recipe, campos que tenham is_published = True e dentro dessa regra:
 
-        buscar em Recipe o campo title que contenha search_term 
-        OU 
+        buscar em Recipe o campo title que contenha search_term
+        OU
         buscar em Recipe o campo description que contenha search_term
 
         o Q é um objeto que permite a criação de queries complexas

@@ -1,9 +1,11 @@
-from django.urls import reverse
 from http import HTTPStatus
+from unittest.mock import patch
+
+from django.urls import reverse
+
 from recipes.tests.test_recipe_base import (
     RecipeTestBase,
 )
-from unittest.mock import patch
 
 
 class RecipeHomeViewTest(RecipeTestBase):

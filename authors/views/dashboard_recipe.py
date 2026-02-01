@@ -1,19 +1,19 @@
-from typing import Any
-from authors.forms.recipe_form import (
-    AuthorRecipeForm,
-)
 from django.contrib import messages
-from django.http.response import Http404
-from django.shortcuts import redirect, render
-from django.urls import reverse
-from django.views import View
-from recipes.models import Recipe
-from django.utils.decorators import (
-    method_decorator,
-)
 from django.contrib.auth.decorators import (
     login_required,
 )
+from django.http.response import Http404
+from django.shortcuts import redirect, render
+from django.urls import reverse
+from django.utils.decorators import (
+    method_decorator,
+)
+from django.views import View
+
+from authors.forms.recipe_form import (
+    AuthorRecipeForm,
+)
+from recipes.models import Recipe
 
 
 @method_decorator(

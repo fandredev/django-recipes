@@ -1,9 +1,11 @@
-from django.urls import reverse, resolve
 from http import HTTPStatus
-from recipes.views import site
+
+from django.urls import resolve, reverse
+
 from recipes.tests.test_recipe_base import (
     RecipeTestBase,
 )
+from recipes.views import site
 
 
 class RecipeDetailViewTest(RecipeTestBase):

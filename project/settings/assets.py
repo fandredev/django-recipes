@@ -1,5 +1,6 @@
-from .environment import BASE_DIR
 import os
+
+from .environment import BASE_DIR
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/

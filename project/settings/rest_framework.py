@@ -1,6 +1,5 @@
-from datetime import timedelta
-
 import os
+from datetime import timedelta
 
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",

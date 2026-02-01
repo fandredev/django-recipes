@@ -1,8 +1,8 @@
 import math
-
 from typing import Sequence
-from django.http import HttpRequest
+
 from django.core.paginator import Paginator
+from django.http import HttpRequest
 
 # Generate SECRET_KEY VARIABLE (use this command in terminal inside environment and and i'm together)
 

@@ -1,7 +1,8 @@
+from django.core.exceptions import ValidationError
+
 from recipes.tests.test_recipe_base import (
     RecipeTestBase,
 )
-from django.core.exceptions import ValidationError
 
 
 class RecipeCategoryModelTest(RecipeTestBase):

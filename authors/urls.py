@@ -1,6 +1,7 @@
 from django.urls import path
-from . import views
 from rest_framework.routers import SimpleRouter
+
+from . import views
 
 app_name = "authors"
 

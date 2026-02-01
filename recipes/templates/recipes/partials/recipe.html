@@ -18,7 +18,7 @@
 
         {% if recipe.author is not None %}
             <span class="recipe-author-item">
-                
+
                 {% if recipe.author.profile %}
                     <a href="{% url 'authors:profile' recipe.author.profile.id %}">
                 {% endif %}

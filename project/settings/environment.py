@@ -1,9 +1,7 @@
+import os
 from pathlib import Path
 
-import os
-
 from utils.environment import get_env_variable, parse_comma_separate_str_to_list
-
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
