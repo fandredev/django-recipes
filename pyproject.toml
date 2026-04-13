@@ -29,7 +29,7 @@ dependencies = [
   "packaging==24.0",
   "parameterized==0.9.0",
   "pathspec==0.12.1",
-  "pillow>=11.0",
+  "pillow>=12.2.0",
   "platformdirs==4.1.0",
   "pluggy==1.5.0",
   "pyjwt==2.8.0",
